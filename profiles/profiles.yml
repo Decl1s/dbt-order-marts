@@ -1,0 +1,8 @@
+order_marts:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: "{{ env_var('DBT_LAB_DB', 'workspace/orders.duckdb') }}"
+      schema: main
+      threads: 1

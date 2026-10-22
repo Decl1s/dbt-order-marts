@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Показать снимок: точка остановки в report",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/lab.py",
+      "args": [
+        "report"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}

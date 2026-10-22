@@ -1,0 +1,31 @@
+name: order_marts
+version: '0.1.0'
+config-version: 2
+profile: order_marts
+model-paths: [models]
+seed-paths: [workspace/seeds]
+test-paths: [tests]
+clean-targets: [workspace/target]
+models:
+  order_marts:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table
+seeds:
+  order_marts:
+    +quote_columns: false
+    raw_orders:
+      +column_types:
+        order_id: varchar
+        order_date: varchar
+        channel: varchar
+        status: varchar
+        amount_cents: varchar
+    raw_refunds:
+      +column_types:
+        refund_id: varchar
+        order_id: varchar
+        amount_cents: varchar

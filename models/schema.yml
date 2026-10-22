@@ -1,0 +1,57 @@
+version: 2
+seeds:
+  - name: raw_orders
+    description: Синтетические заказы; генерируются локально командой prepare.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: order_date
+        data_tests: [not_null]
+      - name: channel
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [web, store]
+      - name: status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [paid, cancelled]
+      - name: amount_cents
+        data_tests: [not_null]
+  - name: raw_refunds
+    description: События возврата; несколько событий одного заказа допустимы.
+    columns:
+      - name: refund_id
+        data_tests: [unique, not_null]
+      - name: order_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('raw_orders')
+                field: order_id
+      - name: amount_cents
+        data_tests: [not_null]
+models:
+  - name: stg_orders
+    description: Заказы с явной типизацией даты.
+  - name: stg_refunds
+    description: События возврата без изменения зерна.
+  - name: int_refunds_by_order
+    description: Одна строка на заказ с суммой его возвратов.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+  - name: fct_orders
+    description: Один заказ; gross/refunded/net в целых копейках.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+  - name: mart_daily_channel
+    description: Дата заказа и канал; только оплаченные заказы.
+    columns:
+      - name: net_cents
+        data_tests: [not_null]
