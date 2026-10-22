@@ -68,7 +68,16 @@ def main() -> None:
                 assert state['status'] == 'failed'
             else:
                 raise AssertionError('Плохой сценарий принят: ' + case)
-    print(json.dumps({'smoke': 'passed', 'builds': 8, 'net_cents': 77000,
+        empty_root = root / 'empty-input'
+        empty_root.mkdir()
+        copy_project(empty_root)
+        lab.prepare(empty_root)
+        (empty_root / 'workspace/seeds/raw_orders.csv').write_text('order_id,order_date,channel,status,amount_cents\n')
+        (empty_root / 'workspace/seeds/raw_refunds.csv').write_text('refund_id,order_id,amount_cents\n')
+        empty = lab.build(empty_root)
+        assert empty['order_rows'] == 0 and empty['daily'] == []
+        assert (empty['gross_cents'], empty['refunded_cents'], empty['net_cents']) == (0, 0, 0)
+    print(json.dumps({'smoke': 'passed', 'builds': 9, 'net_cents': 77000,
                       'repeat_equal': True, 'recovered': True, 'rejected_cases': 5, 'docs_generated': True}))
 
 

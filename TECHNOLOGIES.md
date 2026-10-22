@@ -16,7 +16,7 @@
 | YAML / CSV / JSON | UTF-8 | Конфигурации, пример и снимок: https://docs.python.org/3.12/library/csv.html |
 | unittest / mock | стандартная библиотека | Мастерская и упаковка: https://docs.python.org/3.12/library/unittest.html |
 | SHA-256 / ZIP | hashlib / zipfile | Fingerprint и релиз по allowlist: https://docs.python.org/3.12/library/zipfile.html |
-| Git | локально 2.43.0 | Отдельная история и ветка codex/: https://git-scm.com/docs |
+| Git | локально 2.53.0 | Отдельная история и ветка codex/: https://git-scm.com/docs |
 | GitHub Actions | Ubuntu / Windows, состояние в VALIDATION | CI: https://docs.github.com/ru/actions |
 | actions/checkout | v4, SHA в ci.yml | Получить исходники без сохранения credentials: https://github.com/actions/checkout |
 | actions/setup-python | v5, SHA в ci.yml | Python 3.12 на runner: https://github.com/actions/setup-python |

@@ -77,8 +77,8 @@ py -3.12 -m venv .tools/bootstrap
 ```
 
 В Windows замени `.venv/bin/python` на `.venv/Scripts/python.exe`.
-Smoke делает **8 настоящих сборок dbt** на временных копиях: успех, повтор,
-пять плохих наборов и восстановление после превышенного возврата. Его итог —
+Smoke делает **9 настоящих сборок dbt** на временных копиях: успех, повтор,
+пять плохих наборов, восстановление после превышенного возврата и пустой вход. Его итог —
 `smoke: passed`, `net_cents: 77000`. FAIL/SKIP в отрицательных сценариях ожидаемы;
 успех всей проверки определяется финальным JSON и кодом 0.
 Команда `docs` генерирует `workspace/target/index.html`, `manifest.json` и `catalog.json`,
@@ -102,3 +102,9 @@ Smoke делает **8 настоящих сборок dbt** на временн
 Публикуем исходники по `PUBLIC_FILES.txt`; CSV, БД, логи, target, окружения и результаты
 не входят в Git/ZIP. Все примеры генерируются из констант без реальных персональных данных.
 Фактические проверки и состояние публикации — [VALIDATION.md](VALIDATION.md).
+
+## GitHub
+
+[Публичные исходники](https://github.com/Decl1s/dbt-order-marts),
+[запуски CI](https://github.com/Decl1s/dbt-order-marts/actions),
+[релиз v0.1.0 с исходным ZIP и SHA256SUMS](https://github.com/Decl1s/dbt-order-marts/releases/tag/v0.1.0).

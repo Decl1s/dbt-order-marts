@@ -115,7 +115,7 @@ def read_database(root: Path) -> dict:
     """Снять результаты после полного успеха build; сортировка делает JSON устойчивым."""
     import duckdb
     with duckdb.connect(str(root / 'workspace/orders.duckdb'), read_only=True) as con:
-        facts = con.execute('select count(*), sum(gross_cents), sum(refunded_cents), sum(net_cents) from fct_orders').fetchone()
+        facts = con.execute('select count(*), coalesce(sum(gross_cents), 0), coalesce(sum(refunded_cents), 0), coalesce(sum(net_cents), 0) from fct_orders').fetchone()
         cursor = con.execute('select * from mart_daily_channel order by order_date, channel')
         names = [d[0] for d in cursor.description]
         rows = [dict(zip(names, row)) for row in cursor.fetchall()]
